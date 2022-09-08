@@ -12,7 +12,7 @@ function Header () {
             <div class = 'container'>
                 <div class = 'header__wrapper'>
                     <div class = 'header__logo'>
-                        <a  href = '#' >
+                        <a  href = '/' >
                             <img src ="https://via.placeholder.com/200x60">
                         </a>
                     </div>

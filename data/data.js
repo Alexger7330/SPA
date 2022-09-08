@@ -1,30 +1,30 @@
 [
   {
     "id": "1",
-    "slug": "home",
+    "slug": "Home",
     "pageTitle": "Home | pageTitle",
-    "title": "home",
+    "title": "Home",
     "content": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nostrum quos, ducimus nisi, dolores earum, possimus corporis repellendus maxime iusto modi beatae ipsum. In velit facilis ut natus molestiae consequuntur omnis."
   },
   {
     "id": "2",
-    "slug": "catalog",
+    "slug": "Catalog",
     "pageTitle": "Catalog | pageTitle",
-    "title": "catalog",
+    "title": "Catalog",
     "content": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nostrum quos, ducimus nisi, dolores earum, possimus corporis repellendus maxime iusto modi beatae ipsum. In velit facilis ut natus molestiae consequuntur omnis."
   },
   {
     "id": "3",
-    "slug": "about",
-    "pageTitle": "About | pageTitle",
-    "title": "about",
+    "slug": "AboutUs",
+    "pageTitle": "AboutUs | pageTitle",
+    "title": "AboutUs",
     "content": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nostrum quos, ducimus nisi, dolores earum, possimus corporis repellendus maxime iusto modi beatae ipsum. In velit facilis ut natus molestiae consequuntur omnis."
   },
   {
     "id": "4",
-    "slug": "contacts",
+    "slug": "Contacts",
     "pageTitle": "Contacts | pageTitle",
-    "title": "contacts",
+    "title": "Contacts",
     "content": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nostrum quos, ducimus nisi, dolores earum, possimus corporis repellendus maxime iusto modi beatae ipsum. In velit facilis ut natus molestiae consequuntur omnis."
   }
 ]

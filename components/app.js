@@ -1,6 +1,7 @@
 // import header from "./Header.js";
 // import main from "./Main.js";
 // import footer from "./Footer.js";
+import { getSlugOfHash, getPageData, hashChangeEvent } from "../utils/utils.js";
 
 function App() {
   this.app = "";
@@ -17,24 +18,33 @@ function App() {
       .then((data) => {
         setTimeout(() => {
           localStorage.setItem("dataSPA", data);
+
+          this.setTitle(location.hash);
+          hashChangeEvent(this.setTitle);
           this.render();
+          
         }, 0);
       });
   };
 
+  this.setTitle = (hash) => {
+    const slugOfHash = getSlugOfHash(hash);
+    const data = getPageData(slugOfHash);
+    document.title = data.pageTitle;
+  };
+
   this.render = async () => {
+    const dataHeader = await import("./header.js");
+    const dataMain = await import("./Main.js");
+    const dataFooter = await import("./Footer.js");
 
-    const dataHeader = await import('./header.js');
     const header = dataHeader.default;
-    this.app.appendChild(header)
-
-    const dataMain = await import('./Main.js');
     const main = dataMain.default;
-    this.app.appendChild(main)
-
-    const dataFooter = await import('./Footer.js');
     const footer = dataFooter.default;
-    this.app.appendChild(footer)
+
+    this.app.appendChild(header);
+    this.app.appendChild(main);
+    this.app.appendChild(footer);
 
     // import('./header.js').then(data => {
     //   const header = data.default;

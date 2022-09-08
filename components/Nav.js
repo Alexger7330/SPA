@@ -1,24 +1,17 @@
 function Nav () {
 
     this.localData = JSON.parse(localStorage.getItem("dataSPA"))
-    
     this.create = () => {
         const element = document.createElement('nav')
         element.classList.add('nav')
+        let li = '';
+    
+        this.localData.forEach(({slug,title}) => {
+            li += ` <li class = 'nav__item'><a href = '#${slug}'>${title}</a></li>`
+        });
         element.innerHTML = `
         <ul class = 'nav__items'>
-            <li class = 'nav__item'>
-                <a href = '#'>Home</a>
-            </li>
-            <li class = 'nav__item'>
-                <a href = '#'>Catalog</a>
-            </li>
-            <li class = 'nav__item'>
-                <a href = '#'>About us</a>
-            </li>
-            <li class = 'nav__item'>
-                <a href = '#'>Contacts</a>
-            </li>
+            ${li}
         </ul>
         `
         return element
