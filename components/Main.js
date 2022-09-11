@@ -18,10 +18,6 @@ function Main() {
   this.render = (hash) => {
     const slugOfHash = getSlugOfHash(hash);
 
-    if (!hash) {
-      location.replace(`${location.pathname}#${slugOfHash}`);
-    }
-
     const mainData = getPageData(slugOfHash);
     const { title, content } = mainData;
 

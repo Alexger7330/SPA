@@ -21,7 +21,7 @@ function App() {
 
           this.setTitle(location.hash);
           hashChangeEvent(this.setTitle);
-          this.render();
+          this.render(location.hash);
           
         }, 0);
       });
@@ -33,7 +33,14 @@ function App() {
     document.title = data.pageTitle;
   };
 
-  this.render = async () => {
+  this.render = async (hash) => {
+
+    const slugOfHash = getSlugOfHash(hash);
+
+    if (!hash) {
+      location.replace(`${location.pathname}#${slugOfHash}`);
+    }
+
     const dataHeader = await import("./header.js");
     const dataMain = await import("./Main.js");
     const dataFooter = await import("./Footer.js");
