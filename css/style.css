@@ -5,7 +5,14 @@
     text-decoration: none;
 }
 
+html,
+body {
+    height: 100%;
+}
+
+
 .app {
+    height: 100%;
     display: flex;
     flex-direction: column;
 }
@@ -22,13 +29,25 @@
     justify-content: space-between;
 }
 
+.header__logo img {
+    width: 180px;
+    height: 60px;
+}
+
 .nav__items {
     display: flex;
 }
 
 .nav__item {
-    margin-right: 50px;
     font-size: 19px;
+}
+
+.nav__item a:hover {
+    color: #3c71e3;
+}
+
+.nav__item:not(:last-child) {
+    margin-right: 50px;
 }
 
 .main {
@@ -36,8 +55,9 @@
     flex: 1;
 }
 
-.footer {
-    padding-bottom: 15px;
+.main__wrapper h1{
+    text-align: center;
+    margin-bottom: 40px;
 }
 
 .catalog__items {
@@ -53,9 +73,16 @@
     flex-direction: column;
 }
 
+.catalog__item__title {
+    height: 90px;
+    text-align: justify;
+}
+
 .catalog__item__image {
     height: 200px;
     margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
 }
 
 .catalog__item__image img {
@@ -68,4 +95,83 @@
     justify-content: space-between;
     align-items: center;
     margin: 10px 0;
+}
+
+.catalog__item__price{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 1.15;
+}
+
+.catalog__item__btn{
+    height: 25px;
+    width: 90px;
+    border: 0;
+    border-radius: 5px;
+    background-color: #06c5fafb;
+}
+
+.footer {
+    display: flex;
+    min-height: 80px;
+    align-items: center;
+    background-color: rgb(51, 51, 51, 0.9);
+}
+
+.footer__wrapper {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row-reverse;
+    text-align: center;
+    color: #fff;
+}
+
+.footer__title {
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.footer__sale {
+    margin: 8px 0;
+}
+
+.footer__text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-right: 30px;
+}
+
+.footer__list {
+    display: flex;
+    justify-content: center;
+}
+
+.footer__item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 45px;
+    width: 45px;
+    border-radius: 50%;
+    background-color: #939393;
+}
+
+.footer__item:nth-child(1):hover {
+    background-color: #4376a6;
+}
+
+.footer__item:nth-child(2):hover {
+    background-color: #3b5998;
+}
+
+.footer__item:nth-child(3):hover {
+    background-color: #f7ad00;
+}
+
+.footer__item:not(:last-child) {
+    margin-right: 20px;
 }

@@ -13,7 +13,7 @@ function Header () {
                 <div class = 'header__wrapper'>
                     <div class = 'header__logo'>
                         <a  href = '/' >
-                            <img src ="https://via.placeholder.com/200x60">
+                            <img src ="../img/swift-15.svg">
                         </a>
                     </div>
                     ${nav.outerHTML}
