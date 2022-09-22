@@ -56,8 +56,7 @@ body {
 }
 
 .main__wrapper h1{
-    text-align: center;
-    margin-bottom: 40px;
+    margin-bottom: 35px;
 }
 
 .catalog__items {
@@ -109,7 +108,31 @@ body {
     width: 90px;
     border: 0;
     border-radius: 5px;
-    background-color: #06c5fafb;
+    background-color: rgb(77, 170, 236);
+}
+
+.contacts{
+    font-size: 17px;
+}
+
+.contacts p{ 
+    margin-bottom: 12px;
+}
+
+.contacts__widget{
+    margin: 18px 0;
+}
+
+.contacts___btn{
+    width: auto;
+    height: auto;
+    padding: 10px 24px;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    line-height: 20px;
+    border: 0;
+    color: #fff;
+    background-color: #07c;
 }
 
 .footer {

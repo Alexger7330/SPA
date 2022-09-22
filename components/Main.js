@@ -1,5 +1,5 @@
 import { getSlugOfHash, getPageData, hashChangeEvent } from "../utils/utils.js";
-import { CATALOG } from "../constants/constants.js";
+import { CATALOG, CONTACTS } from "../constants/constants.js";
 
 function Main() {
   this.localData = JSON.parse(localStorage.getItem("dataSPA"));
@@ -23,13 +23,26 @@ function Main() {
 
     this.element.innerHTML = this.getHTMLTemplate(title, content);
 
-    if (slugOfHash === CATALOG) {
-      import("./Catalog.js").then((response) => {
-        let responseDefault = response.default;
-        responseDefault.then((data) => {
-          this.element.innerHTML = this.getHTMLTemplate(title, content, data.outerHTML);
+    switch (true) {
+
+      case (slugOfHash === CATALOG): {
+        import("./Catalog.js").then((response) => {
+          let responseDefault = response.default;
+          responseDefault.then((data) => {
+            this.element.innerHTML = this.getHTMLTemplate(title, content, data.outerHTML);
+          });
         });
-      });
+        break;
+      }
+
+      case (slugOfHash === CONTACTS): {
+        import("./Contacts.js").then((response) => {
+          let responseDefault2 = response.default;
+          this.element.innerHTML = this.getHTMLTemplate(title, responseDefault2.outerHTML)
+        });
+        break;
+      }
+
     }
 
     return this.element;
@@ -40,7 +53,7 @@ function Main() {
             <div class = 'main__wrapper'>
                   <h1>${title}</h1>
                   ${htmlElement ? htmlElement : ""}
-                  <p>${content}</p>
+                  <p>${content ? content : ''}</p>
               </div>
           </div>`;
   };
