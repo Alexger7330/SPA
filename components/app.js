@@ -8,7 +8,7 @@ function App() {
 
   this.create = () => {
     this.app = document.createElement("div");
-    this.app.classList.add("app");  
+    this.app.classList.add("app");
     document.body.appendChild(this.app);
   };
 
@@ -22,7 +22,7 @@ function App() {
           this.setTitle(location.hash);
           hashChangeEvent(this.setTitle);
           this.render(location.hash);
-          
+
         }, 0);
       });
   };

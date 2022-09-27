@@ -1,6 +1,7 @@
-function Catalog() {
-  this.catalogData = [];
+import { CATALOG } from "../constants/constants.js";
 
+function Catalog() {
+  this.catalogData = JSON.parse(localStorage.getItem('catalogData')) || [];
   this.getCatalogData = async () => {
     // fetch("https://fakestoreapi.com/products")
     //   .then((res) => res.json())
@@ -8,6 +9,7 @@ function Catalog() {
 
     const response = await fetch("https://fakestoreapi.com/products");
     const data = await response.json();
+    localStorage.setItem('catalogData',JSON.stringify(data))
     return data;
   };
 
@@ -24,7 +26,7 @@ function Catalog() {
                         <img src = "${image}"alt = "${title}">
                     </div>
                     <div class = 'catalog__item__info'>
-                        <div class = 'catalog__item__title'>${title}</div>
+                        <div class = 'catalog__item__title'><a href="#${CATALOG}/${id}">${title}</a></div>
                         <div class = 'catalog__item__option'>
                             <div class = 'catalog__item__price'>${price}₽</div>
                             <button class = 'catalog__item__btn' id = '${id}'>Add to basket</button>

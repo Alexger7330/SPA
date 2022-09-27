@@ -4,7 +4,7 @@ export const getSlugOfHash = (hash) => {
 
 export const getPageData = (slugOfHash) => {
   const localData = JSON.parse(localStorage.getItem("dataSPA"));
-  const data = localData.find(({ slug }) => slug == slugOfHash);
+  const data = localData.find(({ slug }) => slugOfHash.includes(slug));
   return data;
 };
 
