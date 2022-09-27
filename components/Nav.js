@@ -1,21 +1,23 @@
-function Nav () {
+function Nav() {
 
     this.localData = JSON.parse(localStorage.getItem("dataSPA"))
     this.create = () => {
         const element = document.createElement('nav')
         element.classList.add('nav')
         let li = '';
-    
-        this.localData.forEach(({slug,title}) => {
+
+        this.localData.forEach(({ slug, title }) => {
             li += ` <li class = 'nav__item'><a href = '#${slug}'>${title}</a></li>`
         });
+
         element.innerHTML = `
         <ul class = 'nav__items'>
             ${li}
-        </ul>
-        `
+        </ul>`
+
         return element
     }
+    
     this.init = () => {
         return this.create()
     }

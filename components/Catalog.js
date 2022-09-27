@@ -1,7 +1,9 @@
 import { CATALOG } from "../constants/constants.js";
 
 function Catalog() {
+
   this.catalogData = JSON.parse(localStorage.getItem('catalogData')) || [];
+  
   this.getCatalogData = async () => {
     // fetch("https://fakestoreapi.com/products")
     //   .then((res) => res.json())

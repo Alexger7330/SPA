@@ -1,6 +1,5 @@
 import { getSlugOfHash, getPageData, hashChangeEvent } from "../utils/utils.js";
-import { CATALOG, CONTACTS } from "../constants/constants.js";
-import product from "./Product.js";
+import { CATALOG, CONTACTS, CART } from "../constants/constants.js";
 
 function Main() {
   this.localData = JSON.parse(localStorage.getItem("dataSPA"));
@@ -24,23 +23,43 @@ function Main() {
 
     this.element.innerHTML = this.getHTMLTemplate(title, content);
 
+    if (slugOfHash === CART) {
+      import('./Cart.js').then(response => {
+
+        const cartData = response.default.init();
+        this.element.innerHTML = cartData.outerHTML;
+
+        const deleteCartBtn = this.element.querySelectorAll('.delete__product__btn')
+
+        deleteCartBtn.forEach((btn) => {
+          btn.addEventListener('click', (e) => {
+
+            this.deleteFromCart(e.target.dataset.delete);
+            this.render(location.hash)
+
+            // let cartDataUp = response.default.init();
+            // this.element.innerHTML = cartDataUp.outerHTML;
+          })
+        });
+
+
+      })
+    }
+
     if (slugOfHash.includes(CATALOG)) {
+      this.element.innerHTML = `<div class="loader">Loading...</div>`
+
       if (slugOfHash === CATALOG) {
         import("./Catalog.js").then((response) => {
           let responseDefault = response.default;
           responseDefault.then((data) => {
-            this.element.innerHTML = this.getHTMLTemplate(
-              title,
-              content,
-              data.outerHTML
-            );
 
-            const addToCartBtns = this.element.querySelectorAll(
-              ".catalog__item__btn"
-            );
+            this.element.innerHTML = this.getHTMLTemplate(title, content, data.outerHTML);
+            const addToCartBtns = this.element.querySelectorAll(".catalog__item__btn");
+
             addToCartBtns.forEach((btn) => {
+
               btn.addEventListener("click", (e) => {
-                console.log(e.target.id);
                 this.addToCart(e.target.id)
               });
             });
@@ -48,36 +67,58 @@ function Main() {
         });
       }
 
-      if (slugOfHash.includes("/")) {
-        this.element.innerHTML = `loading....`;
-        import("./Product.js").then((response) => {
+      if (slugOfHash.includes('/')) {
+        this.element.innerHTML = `<div class="loader">Loading...</div>`
+
+        import('./Product.js').then(response => {
+
           const product = response.default.init();
-          product.then((productData) => {
+          product.then(productData => {
+
             this.element.innerHTML = productData.outerHTML;
-          });
-        });
+            const addProductBtn = this.element.querySelector('.add__product__cart');
+            addProductBtn.addEventListener('click', (e) => {
+
+              this.addToCart(e.target.id)
+            })
+          })
+        })
       }
     }
 
     if (slugOfHash === CONTACTS) {
       import("./Contacts.js").then((response) => {
+
         let responseDefault2 = response.default;
-        this.element.innerHTML = this.getHTMLTemplate(title,
-          responseDefault2.outerHTML
-        );
+        this.element.innerHTML = this.getHTMLTemplate(title, responseDefault2.outerHTML);
       });
     }
 
     return this.element;
   };
 
-  this.card = [];
+  this.cart = JSON.parse(localStorage.getItem('cart')) || [];
 
   this.addToCart = (idProduct) => {
-    const dataCatalog = JSON.parse(localStorage.getItem("catalogData"));
-    const product = dataCatalog.find(({ id }) => id === +idProduct);
-    
-  };
+
+    const dataCatalog = JSON.parse(localStorage.getItem('catalogData'));
+    const product = dataCatalog.find(({ id }) => id === +idProduct)
+    const arrayIndex = this.cart.findIndex(({ id }) => id === +idProduct)
+
+    if (arrayIndex !== -1) {
+      this.cart[arrayIndex].count += 1;
+    } else {
+      product.count = 1;
+      this.cart.push(product)
+    }
+
+    localStorage.setItem('cart', JSON.stringify(this.cart))
+  }
+
+  this.deleteFromCart = (idProduct) => {
+    this.cart = this.cart.filter(item => item.id !== +idProduct)
+    localStorage.setItem('cart', JSON.stringify(this.cart))
+  }
 
   this.getHTMLTemplate = (title, content, htmlElement) => {
     return `<div class = 'container'>

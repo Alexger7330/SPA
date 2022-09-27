@@ -26,5 +26,12 @@
     "pageTitle": "Contacts | pageTitle",
     "title": "Contacts",
     "content": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nostrum quos, ducimus nisi, dolores earum, possimus corporis repellendus maxime iusto modi beatae ipsum. In velit facilis ut natus molestiae consequuntur omnis."
-  }
+  },
+  {
+    "id": "5",
+    "slug": "Cart",
+    "pageTitle": "Cart | PageTile",
+    "title": "Cart",
+    "content": ""
+}
 ]
