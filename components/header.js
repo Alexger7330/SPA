@@ -1,6 +1,6 @@
 import nav from './Nav.js'
 
-function Header () {
+function Header() {
     this.init = () => {
         return this.create()
     }

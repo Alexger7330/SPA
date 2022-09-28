@@ -1,3 +1,5 @@
 export const CATALOG = 'Catalog'
 export const CONTACTS = 'Contacts'
 export const CART = 'Cart'
+export const HOME = 'Home'
+export const ABOUT = 'AboutUs'

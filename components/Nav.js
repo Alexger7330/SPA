@@ -11,6 +11,8 @@ function Nav() {
         });
 
         element.innerHTML = `
+        <button class="nav__toggle"><label for="nav__toggle"></label></button>
+        <input type="checkbox" id="nav__toggle">
         <ul class = 'nav__items'>
             ${li}
         </ul>`

@@ -1,5 +1,5 @@
 import { getSlugOfHash, getPageData, hashChangeEvent } from "../utils/utils.js";
-import { CATALOG, CONTACTS, CART } from "../constants/constants.js";
+import { CATALOG, CONTACTS, CART, HOME, ABOUT } from "../constants/constants.js";
 
 function Main() {
   this.localData = JSON.parse(localStorage.getItem("dataSPA"));
@@ -23,75 +23,99 @@ function Main() {
 
     this.element.innerHTML = this.getHTMLTemplate(title, content);
 
-    if (slugOfHash === CART) {
-      import('./Cart.js').then(response => {
-
-        const cartData = response.default.init();
-        this.element.innerHTML = cartData.outerHTML;
-
-        const deleteCartBtn = this.element.querySelectorAll('.delete__product__btn')
-
-        deleteCartBtn.forEach((btn) => {
-          btn.addEventListener('click', (e) => {
-
-            this.deleteFromCart(e.target.dataset.delete);
-            this.render(location.hash)
-
-            // let cartDataUp = response.default.init();
-            // this.element.innerHTML = cartDataUp.outerHTML;
-          })
-        });
 
 
-      })
-    }
+    switch (true) {
+      case slugOfHash === CART:
+        import('./Cart.js').then(response => {
 
-    if (slugOfHash.includes(CATALOG)) {
-      this.element.innerHTML = `<div class="loader">Loading...</div>`
+          const cartData = response.default.init();
+          this.element.innerHTML = cartData.outerHTML;
 
-      if (slugOfHash === CATALOG) {
-        import("./Catalog.js").then((response) => {
-          let responseDefault = response.default;
-          responseDefault.then((data) => {
+          const deleteCartBtn = this.element.querySelectorAll('.delete__product__btn')
 
-            this.element.innerHTML = this.getHTMLTemplate(title, content, data.outerHTML);
-            const addToCartBtns = this.element.querySelectorAll(".catalog__item__btn");
+          deleteCartBtn.forEach((btn) => {
+            btn.addEventListener('click', (e) => {
 
-            addToCartBtns.forEach((btn) => {
+              this.deleteFromCart(e.target.dataset.delete);
+              this.render(location.hash)  // слетают events с кнопок
 
-              btn.addEventListener("click", (e) => {
-                this.addToCart(e.target.id)
+              // this.element.querySelector(`.div${e.target.dataset.delete}`).outerHTML = '';
+
+              // let cartDataUp = response.default.init();
+              // this.element.innerHTML = cartDataUp.outerHTML;
+            })
+          });
+
+
+        })
+        break;
+
+
+      case slugOfHash.includes(CATALOG):
+        this.element.innerHTML = `<div class="loader">Loading...</div>`
+
+        if (slugOfHash === CATALOG) {
+          import("./Catalog.js").then((response) => {
+            let responseDefault = response.default;
+            responseDefault.then((data) => {
+
+              this.element.innerHTML = this.getHTMLTemplate(title, data.outerHTML);
+              const addToCartBtns = this.element.querySelectorAll(".catalog__item__btn");
+
+              addToCartBtns.forEach((btn) => {
+
+                btn.addEventListener("click", (e) => {
+                  this.addToCart(e.target.id)
+                });
               });
             });
           });
-        });
-      }
+        }
 
-      if (slugOfHash.includes('/')) {
-        this.element.innerHTML = `<div class="loader">Loading...</div>`
+        if (slugOfHash.includes('/')) {
+          this.element.innerHTML = `<div class="loader">Loading...</div>`
 
-        import('./Product.js').then(response => {
+          import('./Product.js').then(response => {
 
-          const product = response.default.init();
-          product.then(productData => {
+            const product = response.default.init();
+            product.then(productData => {
 
-            this.element.innerHTML = productData.outerHTML;
-            const addProductBtn = this.element.querySelector('.add__product__cart');
-            addProductBtn.addEventListener('click', (e) => {
+              this.element.innerHTML = productData.outerHTML;
+              const addProductBtn = this.element.querySelector('.add__product__cart');
+              addProductBtn.addEventListener('click', (e) => {
 
-              this.addToCart(e.target.id)
+                this.addToCart(e.target.id)
+              })
             })
           })
-        })
-      }
-    }
+        }
+        break;
 
-    if (slugOfHash === CONTACTS) {
-      import("./Contacts.js").then((response) => {
 
-        let responseDefault2 = response.default;
-        this.element.innerHTML = this.getHTMLTemplate(title, responseDefault2.outerHTML);
-      });
+      case slugOfHash === CONTACTS:
+        import("./Contacts.js").then((response) => {
+
+          let responseDefault2 = response.default;
+          this.element.innerHTML = this.getHTMLTemplate(title, responseDefault2.outerHTML);
+        });
+        break;
+
+      case slugOfHash === HOME:
+        import("./Home.js").then((response) => {
+
+          let responseDefault2 = response.default;
+          this.element.innerHTML = this.getHTMLTemplate(title, responseDefault2.outerHTML);
+        });
+        break;
+
+      case slugOfHash === ABOUT:
+        import("./AboutUs.js").then((response) => {
+
+          let responseDefault2 = response.default;
+          this.element.innerHTML = this.getHTMLTemplate(title, responseDefault2.outerHTML);
+        });
+        break;
     }
 
     return this.element;
